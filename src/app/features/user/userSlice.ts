@@ -4,10 +4,11 @@ import { fetchhUserDetailsAPI, fetchUsersAPI } from "../../../utils/api";
 
 /* eslint-disable*/
 interface UserState {
-  users: Array<string>;
+  users: Array<any>;
   userDetails: Record<string, any> | null;
   loading: boolean;
   error: string;
+  currentSearchQuery: string;
 }
 
 const initialState: UserState = {
@@ -15,6 +16,7 @@ const initialState: UserState = {
   userDetails: null,
   loading: false,
   error: "",
+  currentSearchQuery: "",
 };
 
 export const fetchUsers = createAsyncThunk(
@@ -29,7 +31,6 @@ export const fetchUserDetails = createAsyncThunk(
   "users/fetchUserDetails",
   async (userName: string) => {
     const response = await axios.get(`${fetchhUserDetailsAPI}${userName}`);
-    console.log(response);
     return response.data;
   }
 );
@@ -37,7 +38,21 @@ export const fetchUserDetails = createAsyncThunk(
 export const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    handleCurrentSearchQuery: (state, action) => {
+      state.currentSearchQuery = action.payload;
+    },
+    addToStarred: (state, action) => {
+      state.users = state.users.map((user) =>
+        user.login === action.payload ? { ...user, isStarred: true } : user
+      );
+    },
+    removeFromStarred: (state, action) => {
+      state.users = state.users.map((user) =>
+        user.login === action.payload ? { ...user, isStarred: false } : user
+      );
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchUsers.pending, (state) => {
@@ -65,4 +80,6 @@ export const userSlice = createSlice({
   },
 });
 
+export const { handleCurrentSearchQuery, addToStarred, removeFromStarred } =
+  userSlice.actions;
 export default userSlice.reducer;
