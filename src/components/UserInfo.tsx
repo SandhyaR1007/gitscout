@@ -28,7 +28,7 @@ const UserInfo: React.FC<UserInfoProps> = (user) => {
             href={user.html_url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-500 hover:text-blue-700 hover:underline transition-colors"
+            className="text-indigo-500 hover:text-indigo-700 hover:underline transition-colors"
             aria-label={`Visit ${user.login}'s GitHub profile`}
           >
             @{user.login}
@@ -57,7 +57,7 @@ const UserInfo: React.FC<UserInfoProps> = (user) => {
           href={`https://twitter.com/${user.twitter_username}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 text-blue-500 hover:underline text-center"
+          className="flex items-center gap-2 text-indigo-500 hover:underline text-center"
           aria-label={`Follow ${user.login} on Twitter`}
         >
           <ArrowTopRightOnSquareIcon className="w-5 h-5" />
@@ -69,7 +69,7 @@ const UserInfo: React.FC<UserInfoProps> = (user) => {
           href={`${user.html_url}?tab=repositories`}
           target="_blank"
           rel="noopener noreferrer"
-          className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
+          className="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600 transition-colors"
           aria-label={`View ${user.login}'s repositories`}
         >
           View Repositories

@@ -5,12 +5,16 @@ import UserCard from "./UserCard";
 import Loader from "./Loader";
 
 const UserList = () => {
-  const { users, loading } = useAppSelector((state) => state.users);
+  const { users, loading, error } = useAppSelector((state) => state.users);
 
   if (loading)
     return Array(6)
       .fill(null)
       .map((_, idx) => <Loader key={idx} />);
+
+  if (error) {
+    return <p className="text-center text-red-500">Error: {error}</p>;
+  }
 
   if (!users.length)
     return <p className="text-center text-gray-500">No users found.</p>;
