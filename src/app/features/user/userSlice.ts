@@ -21,7 +21,6 @@ export const fetchUsers = createAsyncThunk(
   "users/fetchUsers",
   async (userName: string) => {
     const response = await axios.get(`${fetchUsersAPI}${userName}`);
-    console.log(response);
     return response.data;
   }
 );
@@ -36,7 +35,7 @@ export const userSlice = createSlice({
         state.loading = true;
       })
       .addCase(fetchUsers.fulfilled, (state, action) => {
-        state.users = action.payload;
+        state.users = action.payload?.items ?? [];
         state.loading = false;
       })
       .addCase(fetchUsers.rejected, (state, action) => {
