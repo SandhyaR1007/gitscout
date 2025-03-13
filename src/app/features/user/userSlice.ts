@@ -7,7 +7,7 @@ interface UserState {
   users: Array<any>;
   userDetails: Record<string, any> | null;
   loading: boolean;
-  error: string;
+  error: string | null;
   currentSearchQuery: string;
 }
 
@@ -15,7 +15,7 @@ const initialState: UserState = {
   users: [],
   userDetails: null,
   loading: false,
-  error: "",
+  error: null,
   currentSearchQuery: "",
 };
 
